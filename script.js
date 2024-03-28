@@ -1,41 +1,36 @@
-randomInt = -1
-input = []
-startArr = []
-validAnswers = []
-numIterations = Math.floor(Math.random() * (6 - 3) + 3)
+let randomInt = -1
+let input = []
+let startArr = []
+let numIterations = -1
 
 function start() {
+    numIterations = Math.floor(Math.random() * (5 - 2) + 2)
     validAnswers = []
+    input = []
     randomInt = Math.floor(Math.random() * 6);
-    for (i = 0; i < 10; i++) {
-        x = Math.floor(Math.random() * 50);
+    for (let i = 0; i < 12; i++) {
+        x = Math.floor(Math.random() * 100);
         input.push(x);
-        startArr.push(x);
     }
+    startArr = [...input];
     console.log(randomInt);
     console.log(`Start Array: ${startArr}`);
     if (randomInt === 0) {
-        validAnswers.push("bubble");
         minBubble();
     }
     else if (randomInt === 1) {
-        validAnswers.push("bubble");
         maxBubble();
     }
     else if (randomInt === 2) {
-        validAnswers.push("selection");
         selection();
     }
     else if (randomInt === 3) {
-        validAnswers.push("insertion");
         insertion();
     }
     else if (randomInt === 4) {
-        validAnswers.push("merge");
         merge();
     }
     else if (randomInt === 5) {
-        validAnswers.push("quick");
         quick();
     }
     else {
@@ -45,8 +40,8 @@ function start() {
 }
 
 function minBubble() {
-    for (i = 0; i < numIterations; i++) {
-        for (j = input.length - 1; j > i; j--) {
+    for (let i = 0; i < numIterations; i++) {
+        for (let j = input.length - 1; j > i; j--) {
             if (input[j] < input[j - 1]) {
                 const temp = input[j];
                 input[j] = input[j - 1];
@@ -57,8 +52,8 @@ function minBubble() {
 }
 
 function maxBubble() {
-    for (i = 0; i < numIterations; i++) {
-        for (j = 0; j < input.length - 1; j++) {
+    for (let i = 0; i < numIterations; i++) {
+        for (let j = 0; j < input.length - 1; j++) {
             if (input[j] > input[j + 1]) {
                 const temp = input[j];
                 input[j] = input[j + 1];
@@ -70,9 +65,9 @@ function maxBubble() {
 }
 
 function selection() {
-    for (i = 0; i < numIterations; i++) {
+    for (let i = 0; i < numIterations; i++) {
         minIndex = i;
-        for (j = i + 1; j < input.length; ++j) {
+        for (let j = i + 1; j < input.length; ++j) {
             if (input[j] < input[minIndex]) {
                 minIndex = j;
             }
@@ -87,14 +82,14 @@ function selection() {
 }
 
 function insertion() {
-    for (i = input.length - 1; i > 0; i--) {
+    for (let i = input.length - 1; i > 0; i--) {
         if (input[i] < input[i - 1]) {
             const temp = input[i];
             input[i] = input[i - 1];
             input[i - 1] = temp;
         }
     }
-    for (i = 2; i < numIterations + 2; i++) {
+    for (let i = 2; i < numIterations + 2; i++) {
         temp = input[i];
         j = i;
         while (temp < input[j - 1]) {
@@ -107,12 +102,63 @@ function insertion() {
 }
 
 function merge() {
-
+    let groupSize = 5;
+    while (groupSize === 5) {
+        groupSize = Math.floor(Math.random() * (7 - 2) + 2);
+    }
+    console.log(`Group Size: ${groupSize}`);
+    for (let i = 0; i < input.length; i += groupSize) {
+        console.log(`Iteration ${i}: ${input}`);
+        const left = input.slice(0, i);
+        const sorted = (input.slice(i, i + groupSize)).sort(function (a, b) {
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+            return 0;
+        });
+        const right = input.slice(i + groupSize);
+        input = left.concat(sorted).concat(right);
+    }
 }
 
-function quick() {
-    quickIterations = Math.floor(numIterations / 2);
+function partition(left, right) {
+    let pivot = --right;
+    while (true) {
+        while (input[left] < input[pivot]) {
+            ++left;
+        }
+        while (left < right && input[right - 1] >= input[pivot]) {
+            --right;
+        }
+        if (left >= right) {
+            break;
+        }
+        let temp = input[left];
+        input[left] = input[right - 1];
+        input[right - 1] = temp;
+    }
+    let temp = input[pivot];
+    input[pivot] = input[left];
+    input[left] = temp;
+    return left;
+}
 
+function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
+    if (currIterations < 2) {
+        currIterations++;
+        let pivot = partition(left, right);
+        if (pivot - left < input.length - pivot) {
+            quick(left, pivot, currIterations);
+            quick(pivot + 1, right, currIterations);
+        }
+        else {
+            quick(pivot + 1, right, currIterations);
+            quick(left, pivot, currIterations);
+        }
+    }
 }
 
 start();
