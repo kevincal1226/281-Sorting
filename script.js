@@ -1,5 +1,6 @@
 randomInt = -1
 input = []
+startArr = []
 validAnswers = []
 numIterations = Math.floor(Math.random() * (6 - 3) + 3)
 
@@ -7,11 +8,12 @@ function start() {
     validAnswers = []
     randomInt = Math.floor(Math.random() * 6);
     for (i = 0; i < 10; i++) {
-        input.push(Math.floor(Math.random() * 50));
+        x = Math.floor(Math.random() * 50);
+        input.push(x);
+        startArr.push(x);
     }
     console.log(randomInt);
-    const startArr = input;
-    console.log(startArr);
+    console.log(`Start Array: ${startArr}`);
     if (randomInt === 0) {
         validAnswers.push("bubble");
         minBubble();
@@ -39,6 +41,7 @@ function start() {
     else {
         console.error("Random Integer not generated properly.");
     }
+    console.log(`End Array: ${input}`);
 }
 
 function minBubble() {
@@ -51,7 +54,6 @@ function minBubble() {
             }
         }
     }
-    console.log(input);
 }
 
 function maxBubble() {
@@ -64,7 +66,6 @@ function maxBubble() {
             }
         }
     }
-    console.log(input);
 
 }
 
@@ -82,7 +83,6 @@ function selection() {
             input[i] = temp;
         }
     }
-    console.log(input);
 
 }
 
@@ -103,7 +103,6 @@ function insertion() {
         }
         input[j] = temp;
     }
-    console.log(input);
 
 }
 
