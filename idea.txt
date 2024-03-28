@@ -1,0 +1,5 @@
+Generate a random set of 10 numbers from 1 to 50, allow duplicates
+Randomly select a sort to choose from, index 0 to 4 inclusive
+Randomly select the number of partitions to do, probably 3 - 6
+Display the original and updated arrays
+Ask for the answer
