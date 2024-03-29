@@ -1,0 +1,91 @@
+:root {
+    --background-color: var(--grey);
+    --primary-container: var(--dark-grey);
+    --on-primary-container: var(--off-white);
+    --input-background: #666666;
+    --input-foreground: var(--off-white-lighter);
+    --primary: #1890ff;
+    --primary-darker: #096dd9;
+    --off-white: #EFEFEF;
+    --off-white-lighter: #f2f2f2;
+    --grey: #464646;
+    --mid-grey: #383838;
+    --dark-grey: #262626;
+    --red: #cd2337;
+    color-scheme: dark;
+    color: var(--off-white);
+}
+
+.light-mode {
+    background-color: var(--off-white);
+    --primary-container: var(--off-white-lighter);
+    --on-pimary-container: #000000;
+    color: #000000;
+}
+
+#toggleBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    border: none;
+    padding: 0;
+}
+
+#toggleBtn img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#toggleBtn:hover {
+    background-color: #EAD60A;
+    border-radius: 50%;
+}
+
+body {
+    transition: background-color 0.4s ease;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+    font-size: 50px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    width: 45%;
+    height: 200px;
+    margin: 10px;
+    background-color: var(--primary);
+    color: var(--off-white);
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--primary-darker);
+}

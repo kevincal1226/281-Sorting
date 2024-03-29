@@ -3,9 +3,20 @@ let input = []
 let startArr = []
 let numIterations = -1
 
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById('toggleBtn');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const mode = body.classList.contains('light-mode') ? 'light' : 'dark';
+        toggleBtn.innerHTML = `<img src="moon_${mode.toLowerCase()}.png" alt="Moon">`;
+
+    });
+});
+
 function start() {
     numIterations = Math.floor(Math.random() * (5 - 2) + 2)
-    validAnswers = []
     input = []
     randomInt = Math.floor(Math.random() * 6);
     for (let i = 0; i < 12; i++) {
@@ -13,7 +24,6 @@ function start() {
         input.push(x);
     }
     startArr = [...input];
-    console.log(randomInt);
     console.log(`Start Array: ${startArr}`);
     if (randomInt === 0) {
         minBubble();
@@ -106,9 +116,7 @@ function merge() {
     while (groupSize === 5) {
         groupSize = Math.floor(Math.random() * (7 - 2) + 2);
     }
-    console.log(`Group Size: ${groupSize}`);
     for (let i = 0; i < input.length; i += groupSize) {
-        console.log(`Iteration ${i}: ${input}`);
         const left = input.slice(0, i);
         const sorted = (input.slice(i, i + groupSize)).sort(function (a, b) {
             if (a < b) {
@@ -146,9 +154,9 @@ function partition(left, right) {
     return left;
 }
 
-function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
-    if (currIterations < 2) {
-        currIterations++;
+function quick(left = 0, right = input.length, currIterations = 0) {
+    if (currIterations == 0) {
+        ++currIterations;
         let pivot = partition(left, right);
         if (pivot - left < input.length - pivot) {
             quick(left, pivot, currIterations);
