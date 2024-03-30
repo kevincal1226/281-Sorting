@@ -1,6 +1,6 @@
 :root {
     --background-color: var(--grey);
-    --primary-container: var(--primary);
+    --primary-container: var(--mid-grey);
     --on-primary-container: var(--off-white);
     --input-background: #666666;
     --input-foreground: var(--off-white-lighter);
@@ -74,20 +74,18 @@ h1 {
     flex-wrap: wrap;
 }
 
-.button {
-    width: 45%;
-    height: 200px;
-    margin: 10px;
-    background-color: var(--primary);
-    color: var(--off-white);
-    font-size: 25px;
+button {
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    background-color: var(--primary);
+    color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 200ms;
+    font-size: 16px;
 }
 
-.button:hover {
+button:hover {
     background-color: var(--primary-darker);
 }
 
