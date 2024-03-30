@@ -1,6 +1,6 @@
 :root {
     --background-color: var(--grey);
-    --primary-container: var(--dark-grey);
+    --primary-container: var(--primary);
     --on-primary-container: var(--off-white);
     --input-background: #666666;
     --input-foreground: var(--off-white-lighter);
@@ -19,8 +19,9 @@
 .light-mode {
     background-color: var(--off-white);
     --primary-container: var(--off-white-lighter);
-    --on-pimary-container: #000000;
-    color: #000000;
+    --on-primary-container: var(--dark-grey);
+    color-scheme: light;
+    color: var(--dark-grey);
 }
 
 #toggleBtn {
@@ -88,4 +89,32 @@ h1 {
 
 .button:hover {
     background-color: var(--primary-darker);
+}
+
+#quiz-container {
+    padding: 20px;
+}
+
+#main-window {
+    vertical-align: middle;
+    background-color: var(--primary-container);
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow-x: hidden;
+    transition: all 100ms ease-out;
+    color: var(--on-primary-container);
+}
+
+#result,
+.wrong-answers {
+    color: var(--red);
+    font-weight: bold;
+}
+
+#question {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--primary);
 }
