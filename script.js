@@ -13,10 +13,30 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBtn.innerHTML = `<img src="moon_${mode.toLowerCase()}.png" alt="Moon">`;
 
     });
+
+    document.getElementById('bubble-sort').addEventListener('click', () => {
+        verifySort([0, 1]);
+    });
+    document.getElementById('insertion-sort').addEventListener('click', () => {
+        verifySort([2]);
+
+    });
+    document.getElementById('selection-sort').addEventListener('click', () => {
+        verifySort([3]);
+
+    });
+    document.getElementById('merge-sort').addEventListener('click', () => {
+        verifySort([4]);
+
+    });
+    document.getElementById('quick-sort').addEventListener('click', () => {
+        verifySort([5]);
+
+    });
 });
 
 function start() {
-    numIterations = Math.floor(Math.random() * (5 - 2) + 2)
+    numIterations = Math.floor(Math.random() * (5 - 3) + 3)
     input = []
     randomInt = Math.floor(Math.random() * 6);
     for (let i = 0; i < 12; i++) {
@@ -154,8 +174,8 @@ function partition(left, right) {
     return left;
 }
 
-function quick(left = 0, right = input.length, currIterations = 0) {
-    if (currIterations == 0) {
+function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
+    if (currIterations < 2) {
         ++currIterations;
         let pivot = partition(left, right);
         if (pivot - left < input.length - pivot) {
@@ -166,6 +186,12 @@ function quick(left = 0, right = input.length, currIterations = 0) {
             quick(pivot + 1, right, currIterations);
             quick(left, pivot, currIterations);
         }
+    }
+}
+
+function verifySort(type) {
+    if (type.includes(randomInt)) {
+        console.log("Correct!");
     }
 }
 
