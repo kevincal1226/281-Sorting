@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function start() {
     numIterations = Math.floor(Math.random() * (5 - 3) + 3)
     input = []
-    randomInt = Math.floor(Math.random() * 6);
+    //randomInt = Math.floor(Math.random() * 6);
+    randomInt = 2;
     for (let i = 0; i < 12; i++) {
         x = Math.floor(Math.random() * 100);
         input.push(x);
@@ -71,8 +72,8 @@ function start() {
     }
     console.log(`Start Array: ${startArr}`);
     console.log(`End Array: ${input}`);
-    document.getElementById('initial').innerText = "Start Array: " + JSON.stringify(startArr);
-    document.getElementById('end').innerText = "End Array: " + JSON.stringify(input);
+    document.getElementById('initial').innerText = "Start Array: [" + startArr.join(', ') + "]";
+    document.getElementById('end').innerText = "End Array: [" + input.join(", ") + "]";
 }
 
 function minBubble() {
@@ -89,7 +90,7 @@ function minBubble() {
 
 function maxBubble() {
     for (let i = 0; i < numIterations; i++) {
-        for (let j = 0; j < input.length - 1; j++) {
+        for (let j = 0; j < input.length; j++) {
             if (input[j] > input[j + 1]) {
                 const temp = input[j];
                 input[j] = input[j + 1];
@@ -102,7 +103,7 @@ function maxBubble() {
 
 function selection() {
     for (let i = 0; i < numIterations; i++) {
-        minIndex = i;
+        let minIndex = i;
         for (let j = i + 1; j < input.length; ++j) {
             if (input[j] < input[minIndex]) {
                 minIndex = j;
