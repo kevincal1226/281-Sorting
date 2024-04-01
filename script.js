@@ -40,10 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function start() {
-    numIterations = Math.floor(Math.random() * (5 - 3) + 3)
+    numIterations = Math.floor(Math.random() * (6 - 3) + 3)
     input = []
     //randomInt = Math.floor(Math.random() * 6);
-    randomInt = 2;
+    randomInt = 5;
     for (let i = 0; i < 12; i++) {
         x = Math.floor(Math.random() * 100);
         input.push(x);
