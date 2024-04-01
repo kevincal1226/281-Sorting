@@ -42,8 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function start() {
     numIterations = Math.floor(Math.random() * (6 - 3) + 3)
     input = []
-    //randomInt = Math.floor(Math.random() * 6);
-    randomInt = 5;
+    randomInt = Math.floor(Math.random() * 6);
     for (let i = 0; i < 12; i++) {
         x = Math.floor(Math.random() * 100);
         input.push(x);
@@ -182,6 +181,9 @@ function partition(left, right) {
 }
 
 function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
+    if (left == right) {
+        return;
+    }
     if (currIterations < 2) {
         ++currIterations;
         let pivot = partition(left, right);
@@ -199,7 +201,7 @@ function quick(left = 0, right = input.length, currIterations = Math.floor(Math.
 function verifySort(type) {
     numQuestions++;
     if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
-        console.log("Correct!");
+        console.log("STD Wizard! (Merlinius, is that you?)");
         numCorrect++;
         winStreak++;
     }
