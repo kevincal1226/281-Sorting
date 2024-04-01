@@ -180,24 +180,43 @@ function partition(left, right) {
     return left;
 }
 
-function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
-    if (left == right) {
-        return;
-    }
-    if (currIterations < 2) {
-        ++currIterations;
-        let pivot = partition(left, right);
-        if (pivot - left < input.length - pivot) {
-            quick(left, pivot, currIterations);
-            quick(pivot + 1, right, currIterations);
+function iterativePartition(low, high) {
+    const pivot = input[high];
+    let i = low - 1;
+
+    for (let j = low; j < high; j++) {
+        if (input[j] < pivot) {
+            i++;
+            [input[i], input[j]] = [input[j], input[i]];
         }
-        else {
-            quick(pivot + 1, right, currIterations);
-            quick(left, pivot, currIterations);
+    }
+
+    [input[i + 1], input[high]] = [input[high], input[i + 1]];
+    return i + 1;
+}
+
+function iterativeQuickSort() {
+    const stack = [];
+    stack.push(0);
+    stack.push(input.length - 1);
+
+    while (stack.length > 0) {
+        const high = stack.pop();
+        const low = stack.pop();
+
+        const p = iterativePartition(low, high);
+
+        if (p - 1 > low) {
+            stack.push(low);
+            stack.push(p - 1);
+        }
+
+        if (p + 1 < high) {
+            stack.push(p + 1);
+            stack.push(high);
         }
     }
 }
-
 function verifySort(type) {
     numQuestions++;
     if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
