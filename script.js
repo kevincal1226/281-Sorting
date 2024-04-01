@@ -2,6 +2,9 @@ let randomInt = -1
 let input = []
 let startArr = []
 let numIterations = -1
+let winStreak = 0
+let numQuestions = 0
+let numCorrect = 0
 
 document.addEventListener("DOMContentLoaded", function () {
     const toggleBtn = document.getElementById('toggleBtn');
@@ -44,7 +47,6 @@ function start() {
         input.push(x);
     }
     startArr = [...input];
-    console.log(`Start Array: ${startArr}`);
     if (randomInt === 0) {
         minBubble();
     }
@@ -66,6 +68,7 @@ function start() {
     else {
         console.error("Random Integer not generated properly.");
     }
+    console.log(`Start Array: ${startArr}`);
     console.log(`End Array: ${input}`);
 }
 
@@ -190,8 +193,15 @@ function quick(left = 0, right = input.length, currIterations = Math.floor(Math.
 }
 
 function verifySort(type) {
-    if (type.includes(randomInt)) {
+    numQuestions++;
+    if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
         console.log("Correct!");
+        numCorrect++;
+        winStreak++;
+    }
+    else {
+        console.log("Skill Issue, Man!");
+        winStreak = 0;
     }
 }
 
