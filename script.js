@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         verifySort([5]);
 
     });
+    start();
 });
 
 function start() {
@@ -70,6 +71,8 @@ function start() {
     }
     console.log(`Start Array: ${startArr}`);
     console.log(`End Array: ${input}`);
+    document.getElementById('initial').innerText = "Start Array: " + JSON.stringify(startArr);
+    document.getElementById('end').innerText = "End Array: " + JSON.stringify(input);
 }
 
 function minBubble() {
@@ -204,5 +207,3 @@ function verifySort(type) {
         winStreak = 0;
     }
 }
-
-start();
