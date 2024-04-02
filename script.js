@@ -6,8 +6,9 @@ let winStreak = 0
 let numQuestions = 0
 let numCorrect = 0
 
-document.addEventListener("DOMContentLoaded", function () {
-    start();
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('quiz-container').classList.remove("hidden");
+    document.getElementById('answer-container').classList.add("hidden");
     const toggleBtn = document.getElementById('toggleBtn');
     const body = document.body;
 
@@ -37,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         verifySort([5]);
 
     });
+
+    start();
+
 });
 
 function start() {
