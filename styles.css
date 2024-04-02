@@ -68,6 +68,11 @@ h1 {
     margin-bottom: 30px;
 }
 
+h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -82,7 +87,7 @@ button {
     color: #fff;
     cursor: pointer;
     transition: background-color 200ms;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 button:hover {
