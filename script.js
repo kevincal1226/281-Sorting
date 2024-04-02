@@ -7,6 +7,7 @@ let numQuestions = 0
 let numCorrect = 0
 
 document.addEventListener("DOMContentLoaded", function () {
+    start();
     const toggleBtn = document.getElementById('toggleBtn');
     const body = document.body;
 
@@ -36,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         verifySort([5]);
 
     });
-    start();
 });
 
 function start() {
@@ -217,6 +217,48 @@ function iterativeQuickSort() {
         }
     }
 }
+
+function partition(left, right) {
+    let pivot = --right;
+    while (true) {
+        while (input[left] < input[pivot]) {
+            ++left;
+        }
+        while (left < right && input[right - 1] >= input[pivot]) {
+            --right;
+        }
+        if (left >= right) {
+            break;
+        }
+        let temp = input[left];
+        input[left] = input[right - 1];
+        input[right - 1] = temp;
+    }
+    let temp = input[pivot];
+    input[pivot] = input[left];
+    input[left] = temp;
+    return left;
+}
+
+function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
+    if (left == right) {
+        return;
+    }
+    if (currIterations < 2) {
+        ++currIterations;
+        let pivot = partition(left, right);
+        if (pivot - left < input.length - pivot) {
+            quick(left, pivot, currIterations);
+            quick(pivot + 1, right, currIterations);
+        }
+        else {
+            quick(pivot + 1, right, currIterations);
+            quick(left, pivot, currIterations);
+        }
+    }
+}
+
+
 function verifySort(type) {
     numQuestions++;
     if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
