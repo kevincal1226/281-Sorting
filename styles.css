@@ -102,10 +102,12 @@ button:hover {
 }
 
 #stats-window {
+    width: 30%;
     vertical-align: middle;
     background-color: var(--primary-container);
     border-radius: 8px;
-    margin: 50px;
+    margin: auto;
+    margin-top: 50px;
     padding: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -118,5 +120,6 @@ button:hover {
     font-size: 14px;
     text-align: center;
     position: absolute;
+    right: 10px;
     bottom: 0px;
 }
