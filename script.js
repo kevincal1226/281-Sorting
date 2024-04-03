@@ -5,10 +5,10 @@ let numIterations = -1
 let winStreak = 0
 let numQuestions = 0
 let numCorrect = 0
+let sortsNames = ['Bubble Sort', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Merge Sort', 'Quicksort'];
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById('quiz-container').classList.remove("hidden");
-    document.getElementById('answer-container').classList.add("hidden");
+    document.getElementById('answer-container').classList.add('hidden');
     const toggleBtn = document.getElementById('toggleBtn');
     const body = document.body;
 
@@ -39,11 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    document.getElementById('continue-button').addEventListener('click', () => {
+        start();
+    });
+
     start();
 
 });
 
 function start() {
+    document.getElementById('answer-container').style.display = "none";
+    document.getElementById('solution').innerText = "";
     numIterations = Math.floor(Math.random() * (6 - 3) + 3)
     input = []
     randomInt = Math.floor(Math.random() * 6);
@@ -266,12 +272,16 @@ function quick(left = 0, right = input.length, currIterations = Math.floor(Math.
 function verifySort(type) {
     numQuestions++;
     if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
-        console.log("STD Wizard! (Merlinius, is that you?)");
+        document.getElementById('answer-container').style.display = "block";
+        document.getElementById('solution').style.color = "green";
+        document.getElementById('solution').innerText = 'STD Wizard! (Merlinius, is that you?)';
         numCorrect++;
         winStreak++;
     }
     else {
-        console.log("Skill Issue, Man!");
+        document.getElementById('answer-container').style.display = "block";
+        document.getElementById('solution').style.color = "red";
+        document.getElementById('solution').innerText = `Incorrect (Correct Answer: ${sortsNames[randomInt]})`;
         winStreak = 0;
     }
 }
