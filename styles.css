@@ -11,8 +11,8 @@
     --grey: #464646;
     --mid-grey: #383838;
     --dark-grey: #262626;
-    --red: #cd2337;
-    --green: #009619;
+    --red: #ff2f2f;
+    --green: #26b83e;
     color-scheme: dark;
     color: var(--off-white);
 }
@@ -104,6 +104,19 @@ button:hover {
     background-color: var(--primary-container);
     border-radius: 8px;
     margin: 10px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow-x: hidden;
+    transition: all 100ms ease-out;
+    color: var(--on-primary-container);
+}
+
+#stats-window {
+    vertical-align: middle;
+    background-color: var(--primary-container);
+    border-radius: 8px;
+    margin: 50px;
     padding: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;

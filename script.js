@@ -3,11 +3,16 @@ let input = []
 let startArr = []
 let numIterations = -1
 let winStreak = 0
+let bestWinStreak = 0
 let numQuestions = 0
 let numCorrect = 0
 let sortsNames = ['Bubble Sort', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Merge Sort', 'Quicksort'];
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
+    document.getElementById('accuracy').innerText = `Accuracy: 0.00%`;
+    document.getElementById('win-streak').innerText = `Current Win Streak: ${winStreak}`;
+    document.getElementById('best-win-streak').innerText = `Best Win Streak: ${bestWinStreak}`;    
     document.getElementById('answer-container').classList.add('hidden');
     const toggleBtn = document.getElementById('toggleBtn');
     const body = document.body;
@@ -49,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function start() {
     document.getElementById('answer-container').style.display = "none";
+    document.getElementById('answer-selection').style.display = "block";
     document.getElementById('solution').innerText = "";
     numIterations = Math.floor(Math.random() * (6 - 3) + 3)
     input = []
@@ -273,15 +279,22 @@ function verifySort(type) {
     numQuestions++;
     if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
         document.getElementById('answer-container').style.display = "block";
-        document.getElementById('solution').style.color = "green";
-        document.getElementById('solution').innerText = 'STD Wizard! (Merlinius, is that you?)';
+        document.getElementById('answer-selection').style.display = "none";
+        document.getElementById('solution').style.color = "#0fa328";
+        document.getElementById('solution').innerText = winStreak < 100 ? `Correct (Answer: ${sortsNames[randomInt]})` : 'STD Wizard! (Merlinius, is that you?)';
         numCorrect++;
         winStreak++;
+        bestWinStreak = Math.max(winStreak, bestWinStreak);
     }
     else {
         document.getElementById('answer-container').style.display = "block";
-        document.getElementById('solution').style.color = "red";
-        document.getElementById('solution').innerText = `Incorrect (Correct Answer: ${sortsNames[randomInt]})`;
+        document.getElementById('answer-selection').style.display = "none";
+        document.getElementById('solution').style.color = "#ff2f2f";
+        document.getElementById('solution').innerText = `Incorrect (Answer: ${sortsNames[randomInt]})`;
         winStreak = 0;
     }
+    document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
+    document.getElementById('accuracy').innerText = `Accuracy: ${(parseFloat(numCorrect)/parseFloat(numQuestions) * 100).toFixed(2)}%`;
+    document.getElementById('win-streak').innerText = `Current Win Streak: ${winStreak}`;
+    document.getElementById('best-win-streak').innerText = `Best Win Streak: ${bestWinStreak}`;
 }
