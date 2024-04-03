@@ -2,8 +2,6 @@
     --background-color: var(--grey);
     --primary-container: var(--mid-grey);
     --on-primary-container: var(--off-white);
-    --input-background: #666666;
-    --input-foreground: var(--off-white-lighter);
     --primary: #1890ff;
     --primary-darker: #096dd9;
     --off-white: #EFEFEF;
@@ -53,15 +51,6 @@ body {
     margin: 0;
     padding: 0px;
     font-family: Arial, sans-serif;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 50px;
-    font-size: 50px;
 }
 
 h1 {
@@ -123,18 +112,6 @@ button:hover {
     overflow-x: hidden;
     transition: all 100ms ease-out;
     color: var(--on-primary-container);
-}
-
-#result,
-.wrong-answers {
-    color: var(--red);
-    font-weight: bold;
-}
-
-#question {
-    font-size: 36px;
-    font-weight: bold;
-    color: var(--primary);
 }
 
 #contact {
