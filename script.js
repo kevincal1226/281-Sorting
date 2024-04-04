@@ -85,8 +85,6 @@ function start() {
     else {
         console.error("Random Integer not generated properly.");
     }
-    console.log(`Start Array: ${startArr}`);
-    console.log(`End Array: ${input}`);
     document.getElementById('initial').innerText = "Start Array: [" + startArr.join(', ') + "]";
     document.getElementById('end').innerText = "End Array: [" + input.join(", ") + "]";
 }
@@ -277,11 +275,19 @@ function quick(left = 0, right = input.length, currIterations = Math.floor(Math.
 
 function verifySort(type) {
     numQuestions++;
-    if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr)) {
+    if (type.includes(randomInt) || JSON.stringify(input) === JSON.stringify(startArr) || JSON.stringify(input) === JSON.stringify([...startArr].sort(function (a, b) {
+        if (a < b) {
+            return -1;
+        }
+        if (a > b) {
+            return 1;
+        }
+        return 0;
+    }))) {
         document.getElementById('answer-container').style.display = "block";
         document.getElementById('answer-selection').style.display = "none";
         document.getElementById('solution').style.color = "#0fa328";
-        document.getElementById('solution').innerText = winStreak < 100 ? `Correct (Answer: ${sortsNames[randomInt]})` : 'STD Wizard! (Merlinius, is that you?)';
+        document.getElementById('solution').innerText = winStreak < 100 ? `Correct (Answer: ${sortsNames[type[0]]})` : 'STD Wizard! (Merlinius, is that you?)';
         numCorrect++;
         winStreak++;
         bestWinStreak = Math.max(winStreak, bestWinStreak);
