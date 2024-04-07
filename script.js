@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('bubble-sort').addEventListener('click', () => {
         verifySort([0, 1]);
     });
-    document.getElementById('insertion-sort').addEventListener('click', () => {
+    document.getElementById('selection-sort').addEventListener('click', () => {
         verifySort([2]);
 
     });
-    document.getElementById('selection-sort').addEventListener('click', () => {
+    document.getElementById('insertion-sort').addEventListener('click', () => {
         verifySort([3]);
 
     });
@@ -122,13 +122,8 @@ function selection() {
                 minIndex = j;
             }
         }
-        if (minIndex != i) {
-            const temp = input[minIndex];
-            input[minIndex] = input[i];
-            input[i] = temp;
-        }
+        [input[minIndex], input[i]] = [input[i], input[minIndex]];
     }
-
 }
 
 function insertion() {
