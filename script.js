@@ -6,7 +6,7 @@ let winStreak = 0
 let bestWinStreak = 0
 let numQuestions = 0
 let numCorrect = 0
-let sortsNames = ['Bubble Sort', 'Bubble Sort', 'Insertion Sort', 'Selection Sort', 'Merge Sort', 'Quicksort'];
+let sortsNames = ['Bubble Sort', 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort', 'Quicksort'];
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
@@ -89,32 +89,39 @@ function start() {
     document.getElementById('end').innerText = "End Array: [" + input.join(", ") + "]";
 }
 
-function minBubble() {
+function minBubble(verify = false) {
     for (let i = 0; i < numIterations; i++) {
         for (let j = input.length - 1; j > i; j--) {
             if (input[j] < input[j - 1]) {
                 const temp = input[j];
                 input[j] = input[j - 1];
                 input[j - 1] = temp;
+                if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+                    return true;
+                }
             }
         }
     }
+    return false;
 }
 
-function maxBubble() {
+function maxBubble(verify = false) {
     for (let i = 0; i < numIterations; i++) {
         for (let j = 0; j < input.length; j++) {
             if (input[j] > input[j + 1]) {
                 const temp = input[j];
                 input[j] = input[j + 1];
                 input[j + 1] = temp;
+                if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+                    return true;
+                }                
             }
         }
     }
-
+    return false;
 }
 
-function selection() {
+function selection(verify = false) {
     for (let i = 0; i < numIterations; i++) {
         let minIndex = i;
         for (let j = i + 1; j < input.length; ++j) {
@@ -123,15 +130,22 @@ function selection() {
             }
         }
         [input[minIndex], input[i]] = [input[i], input[minIndex]];
+        if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+            return true;
+        }        
     }
+    return false;
 }
 
-function insertion() {
+function insertion(verify = false) {
     for (let i = input.length - 1; i > 0; i--) {
         if (input[i] < input[i - 1]) {
             const temp = input[i];
             input[i] = input[i - 1];
             input[i - 1] = temp;
+            if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+                return true;
+            }            
         }
     }
     for (let i = 2; i < numIterations + 2; i++) {
@@ -140,31 +154,42 @@ function insertion() {
         while (temp < input[j - 1]) {
             input[j] = input[j - 1];
             j--;
+            if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+                return true;
+            }            
         }
         input[j] = temp;
+        if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+            return true;
+        }                    
     }
-
+    return false;
 }
 
-function merge() {
-    let groupSize = 5;
-    while (groupSize === 5) {
-        groupSize = Math.floor(Math.random() * (7 - 2) + 2);
+function merge(verify = false, groupSize = [5]) {
+    while (groupSize[0] === 5) {
+        groupSize[0] = Math.floor(Math.random() * (7 - 2) + 2);
     }
-    for (let i = 0; i < input.length; i += groupSize) {
-        const left = input.slice(0, i);
-        const sorted = (input.slice(i, i + groupSize)).sort(function (a, b) {
-            if (a < b) {
-                return -1;
-            }
-            if (a > b) {
-                return 1;
-            }
-            return 0;
-        });
-        const right = input.slice(i + groupSize);
-        input = left.concat(sorted).concat(right);
+    for (let j = 0; j < groupSize.length; ++j) {
+        for (let i = 0; i < input.length; i += groupSize[j]) {
+            const left = input.slice(0, i);
+            const sorted = (input.slice(i, i + groupSize[j])).sort(function (a, b) {
+                if (a < b) {
+                    return -1;
+                }
+                if (a > b) {
+                    return 1;
+                }
+                return 0;
+            });
+            const right = input.slice(i + groupSize[j]);
+            input = left.concat(sorted).concat(right);
+            if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
+                return true;
+            }                        
+        }
     }
+    return false;
 }
 
 function partition(left, right) {
@@ -189,20 +214,20 @@ function partition(left, right) {
     return left;
 }
 
-function iterativePartition(low, high) {
-    const pivot = input[high];
-    let i = low - 1;
+// function iterativePartition(low, high) {
+//     const pivot = input[high];
+//     let i = low - 1;
 
-    for (let j = low; j < high; j++) {
-        if (input[j] < pivot) {
-            i++;
-            [input[i], input[j]] = [input[j], input[i]];
-        }
-    }
+//     for (let j = low; j < high; j++) {
+//         if (input[j] < pivot) {
+//             i++;
+//             [input[i], input[j]] = [input[j], input[i]];
+//         }
+//     }
 
-    [input[i + 1], input[high]] = [input[high], input[i + 1]];
-    return i + 1;
-}
+//     [input[i + 1], input[high]] = [input[high], input[i + 1]];
+//     return i + 1;
+// }
 
 function iterativeQuickSort() {
     const stack = [];
@@ -213,7 +238,7 @@ function iterativeQuickSort() {
         const high = stack.pop();
         const low = stack.pop();
 
-        const p = iterativePartition(low, high);
+        const p = partition(low, high + 1);
 
         if (p - 1 > low) {
             stack.push(low);
@@ -224,29 +249,12 @@ function iterativeQuickSort() {
             stack.push(p + 1);
             stack.push(high);
         }
-    }
-}
 
-function partition(left, right) {
-    let pivot = --right;
-    while (true) {
-        while (input[left] < input[pivot]) {
-            ++left;
-        }
-        while (left < right && input[right - 1] >= input[pivot]) {
-            --right;
-        }
-        if (left >= right) {
-            break;
-        }
-        let temp = input[left];
-        input[left] = input[right - 1];
-        input[right - 1] = temp;
+        if (JSON.stringify(input) === JSON.stringify(startArr)) {
+            return true;
+        }                    
     }
-    let temp = input[pivot];
-    input[pivot] = input[left];
-    input[left] = temp;
-    return left;
+    return false;
 }
 
 function quick(left = 0, right = input.length, currIterations = Math.floor(Math.random() * 2)) {
@@ -267,6 +275,37 @@ function quick(left = 0, right = input.length, currIterations = Math.floor(Math.
     }
 }
 
+function userAnswerWorks(type) {
+    [startArr, input] = [input, startArr];
+    numIterations = input.length;
+    if (type === 0) {
+        return minBubble(true) || maxBubble(true);
+    }
+    else if (type === 2) { 
+        return selection(true);
+    }
+    else if (type === 3) {
+        numIterations = input.length - 2; //have a loop that goes until i < numIterations - 2
+        return insertion(true);
+    }
+    else if (type === 4) {
+        return merge(true);
+    }
+    else if (type === 5) {
+        return iterativeQuickSort();
+    }
+    return false;
+}
+
+function correctAnswer(typeIdx) {
+    document.getElementById('answer-container').style.display = "block";
+    document.getElementById('answer-selection').style.display = "none";
+    document.getElementById('solution').style.color = "#0fa328";
+    document.getElementById('solution').innerText = winStreak < 100 ? `Correct (Answer: ${sortsNames[typeIdx]})` : 'STD Wizard! (Merlinius, is that you?)';
+    numCorrect++;
+    winStreak++;
+    bestWinStreak = Math.max(winStreak, bestWinStreak);
+}
 
 function verifySort(type) {
     numQuestions++;
@@ -279,20 +318,19 @@ function verifySort(type) {
         }
         return 0;
     }))) {
-        document.getElementById('answer-container').style.display = "block";
-        document.getElementById('answer-selection').style.display = "none";
-        document.getElementById('solution').style.color = "#0fa328";
-        document.getElementById('solution').innerText = winStreak < 100 ? `Correct (Answer: ${sortsNames[type[0]]})` : 'STD Wizard! (Merlinius, is that you?)';
-        numCorrect++;
-        winStreak++;
-        bestWinStreak = Math.max(winStreak, bestWinStreak);
+        correctAnswer(type[0]);
     }
     else {
-        document.getElementById('answer-container').style.display = "block";
-        document.getElementById('answer-selection').style.display = "none";
-        document.getElementById('solution').style.color = "#ff2f2f";
-        document.getElementById('solution').innerText = `Incorrect (Answer: ${sortsNames[randomInt]})`;
-        winStreak = 0;
+        if (userAnswerWorks(type[0])) {
+            correctAnswer(type[0]);
+        }
+        else {
+            document.getElementById('answer-container').style.display = "block";
+            document.getElementById('answer-selection').style.display = "none";
+            document.getElementById('solution').style.color = "#ff2f2f";
+            document.getElementById('solution').innerText = `Incorrect (Answer: ${sortsNames[randomInt]})`;
+            winStreak = 0;
+        }
     }
     document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
     document.getElementById('accuracy').innerText = `Accuracy: ${(parseFloat(numCorrect)/parseFloat(numQuestions) * 100).toFixed(2)}%`;
