@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
     document.getElementById('accuracy').innerText = `Accuracy: 0.00%`;
     document.getElementById('win-streak').innerText = `Current Win Streak: ${winStreak}`;
-    document.getElementById('best-win-streak').innerText = `Best Win Streak: ${bestWinStreak}`;    
+    document.getElementById('best-win-streak').innerText = `Best Win Streak: ${bestWinStreak}`;
     document.getElementById('answer-container').classList.add('hidden');
     const toggleBtn = document.getElementById('toggleBtn');
     const body = document.body;
@@ -85,6 +85,9 @@ function start() {
     else {
         console.error("Random Integer not generated properly.");
     }
+    // startArr = [1, 6, 5, 4];
+    // randomInt = 4;
+    // input = [1, 5, 4, 6];
     document.getElementById('initial').innerText = "Start Array: [" + startArr.join(', ') + "]";
     document.getElementById('end').innerText = "End Array: [" + input.join(", ") + "]";
 }
@@ -114,7 +117,7 @@ function maxBubble(verify = false) {
                 input[j + 1] = temp;
                 if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
                     return true;
-                }                
+                }
             }
         }
     }
@@ -132,7 +135,7 @@ function selection(verify = false) {
         [input[minIndex], input[i]] = [input[i], input[minIndex]];
         if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
             return true;
-        }        
+        }
     }
     return false;
 }
@@ -145,7 +148,7 @@ function insertion(verify = false) {
             input[i - 1] = temp;
             if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
                 return true;
-            }            
+            }
         }
     }
     for (let i = 2; i < numIterations + 2; i++) {
@@ -156,12 +159,12 @@ function insertion(verify = false) {
             j--;
             if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
                 return true;
-            }            
+            }
         }
         input[j] = temp;
         if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
             return true;
-        }                    
+        }
     }
     return false;
 }
@@ -186,7 +189,7 @@ function merge(verify = false, groupSize = [5]) {
             input = left.concat(sorted).concat(right);
             if (verify && JSON.stringify(input) === JSON.stringify(startArr)) {
                 return true;
-            }                        
+            }
         }
     }
     return false;
@@ -252,7 +255,7 @@ function iterativeQuickSort() {
 
         if (JSON.stringify(input) === JSON.stringify(startArr)) {
             return true;
-        }                    
+        }
     }
     return false;
 }
@@ -277,11 +280,15 @@ function quick(left = 0, right = input.length, currIterations = Math.floor(Math.
 
 function userAnswerWorks(type) {
     [startArr, input] = [input, startArr];
+    let maxBubbleTemp = [...input];
     numIterations = input.length;
     if (type === 0) {
-        return minBubble(true) || maxBubble(true);
+        if (!minBubble(true)) {
+            input = [...maxBubbleTemp];
+            return maxBubble(true);
+        }
     }
-    else if (type === 2) { 
+    else if (type === 2) {
         return selection(true);
     }
     else if (type === 3) {
@@ -333,7 +340,7 @@ function verifySort(type) {
         }
     }
     document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
-    document.getElementById('accuracy').innerText = `Accuracy: ${(parseFloat(numCorrect)/parseFloat(numQuestions) * 100).toFixed(2)}%`;
+    document.getElementById('accuracy').innerText = `Accuracy: ${(parseFloat(numCorrect) / parseFloat(numQuestions) * 100).toFixed(2)}%`;
     document.getElementById('win-streak').innerText = `Current Win Streak: ${winStreak}`;
     document.getElementById('best-win-streak').innerText = `Best Win Streak: ${bestWinStreak}`;
 }
