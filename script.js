@@ -217,21 +217,6 @@ function partition(left, right) {
     return left;
 }
 
-// function iterativePartition(low, high) {
-//     const pivot = input[high];
-//     let i = low - 1;
-
-//     for (let j = low; j < high; j++) {
-//         if (input[j] < pivot) {
-//             i++;
-//             [input[i], input[j]] = [input[j], input[i]];
-//         }
-//     }
-
-//     [input[i + 1], input[high]] = [input[high], input[i + 1]];
-//     return i + 1;
-// }
-
 function iterativeQuickSort() {
     const stack = [];
     stack.push(0);
