@@ -86,9 +86,9 @@ function start() {
         console.error("Random Integer not generated properly.");
     }
     // Elementary Sort Demo
-    startArr = [1, 6, 5, 4];
-    randomInt = 4;
-    input = [1, 5, 4, 6];
+    // startArr = [1, 6, 5, 4];
+    // randomInt = 4;
+    // input = [1, 5, 4, 6];
 
     // More Advanced Sort Demo
     // randomInt = 1;
