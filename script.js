@@ -6,7 +6,7 @@ let winStreak = 0
 let bestWinStreak = 0
 let numQuestions = 0
 let numCorrect = 0
-let sortsNames = ['Bubble Sort', 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort', 'Quicksort'];
+let sortsNames = ['Min Bubble Sort', 'Max Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort', 'Quicksort'];
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
