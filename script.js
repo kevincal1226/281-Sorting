@@ -85,15 +85,6 @@ function start() {
     else {
         console.error("Random Integer not generated properly.");
     }
-    // Elementary Sort Demo
-    // startArr = [1, 6, 5, 4];
-    // randomInt = 4;
-    // input = [1, 5, 4, 6];
-
-    // More Advanced Sort Demo
-    // randomInt = 1;
-    // startArr = [2, 9, 3, 4, 7, 5, 8, 6];
-    // input = [2, 5, 3, 4, 6, 9, 8, 7];
     document.getElementById('initial').innerText = "Start Array: [" + startArr.join(', ') + "]";
     document.getElementById('end').innerText = "End Array: [" + input.join(", ") + "]";
 }
