@@ -312,7 +312,7 @@ function verifySort(type) {
         }
         return 0;
     }))) {
-        correctAnswer(type[0]);
+        correctAnswer(randomInt);
     }
     else {
         if (userAnswerWorks(type[0])) {
