@@ -6,7 +6,7 @@ let winStreak = 0
 let bestWinStreak = 0
 let numQuestions = 0
 let numCorrect = 0
-let sortsNames = ['Bubble Sort', 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort', 'Quicksort'];
+let sortsNames = ['Min Bubble Sort', 'Max Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort', 'Quicksort'];
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('total-questions').innerText = `Questions Attempted: ${numQuestions}`;
@@ -85,15 +85,6 @@ function start() {
     else {
         console.error("Random Integer not generated properly.");
     }
-    // Elementary Sort Demo
-    // startArr = [1, 6, 5, 4];
-    // randomInt = 4;
-    // input = [1, 5, 4, 6];
-
-    // More Advanced Sort Demo
-    // randomInt = 1;
-    // startArr = [2, 9, 3, 4, 7, 5, 8, 6];
-    // input = [2, 5, 3, 4, 6, 9, 8, 7];
     document.getElementById('initial').innerText = "Start Array: [" + startArr.join(', ') + "]";
     document.getElementById('end').innerText = "End Array: [" + input.join(", ") + "]";
 }
@@ -274,9 +265,14 @@ function userAnswerWorks(type) {
     let maxBubbleTemp = [...input];
     numIterations = input.length;
     if (type === 0) {
-        if (!minBubble(true)) {
-            input = [...maxBubbleTemp];
-            return maxBubble(true);
+        if (minBubble(true)) {
+            correctAnswer(0);
+            return true;
+        }
+        input = [...maxBubbleTemp];
+        if (maxBubble(true)) {
+            correctAnswer(1);
+            return true;
         }
     }
     else if (type === 2) {
@@ -316,11 +312,13 @@ function verifySort(type) {
         }
         return 0;
     }))) {
-        correctAnswer(type[0]);
+        correctAnswer(randomInt);
     }
     else {
         if (userAnswerWorks(type[0])) {
-            correctAnswer(type[0]);
+            if (type[0] !== 0) {
+                correctAnswer(type[0]);
+            }
         }
         else {
             document.getElementById('answer-container').style.display = "block";
